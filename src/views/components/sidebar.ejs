@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <title>Sidebar</title>
+</head>
+<body>
+    <aside class="h-screen w-[12rem] bg-gray-900 text-white px-3 py-2">
+        <h1 class="pb-5 font-bold text-xl">Admin Panel</h1>
+        <div class="flex flex-col gap-3">
+
+            <a href="/dashboard" class="hover:bg-gray-500 px-2 py-1">
+                <i class="fa-solid fa-house"></i> Dashboard
+            </a>
+
+            <a href="/manage_user" class="hover:bg-gray-500 px-2 py-1">
+                <i class="fa-solid fa-users"></i> Users
+            </a>
+
+            <a href="#" class="hover:bg-gray-500 px-2 py-1">
+                <i class="fa-solid fa-layer-group"></i> Services
+            </a>
+
+            <a href="#" class="hover:bg-gray-500 px-2 py-1">
+                <i class="fa-solid fa-cart-shopping"></i> Orders
+            </a>
+
+            <a href="#" class="hover:bg-gray-500 px-2 py-1">
+                <i class="fa-solid fa-user-tie"></i> Customers
+            </a>
+
+            <a href="/auth/login" class="hover:bg-gray-500 px-2 py-1">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </a>
+        </div>
+    </aside>
+</body>
+</html>

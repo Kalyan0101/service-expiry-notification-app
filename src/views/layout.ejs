@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title> <%- title %> </title>
+</head>
+<body>
+    <div class="w-full flex flex-row items-start justify-start">
+
+        <!-- left side nav -->
+        <div class="">
+            <%- include('components/sidebar') %>
+        </div>
+
+        <!-- right side main content -->
+        <div class="flex flex-col w-full">
+
+            <!-- header -->
+            <div class="w-full">
+                <%- include('components/navbar', { title }) %>
+            </div>
+
+            <!-- main -->
+             <div class="w-full">
+                 <%- body %>
+             </div>
+        </div>
+    </div>
+
+
+
+</body>
+</html>
