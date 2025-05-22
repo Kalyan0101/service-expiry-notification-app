@@ -3,7 +3,7 @@ import render_page from "../utils/render_page.js";
 
 const router = Router();
 
-router.get('/dashboard', async (req, res) => {
+router.get('/', async (req, res) => {
     const content = await render_page('dashboard')
     res.render('../views/layout', {
         title: "Dashboard",
