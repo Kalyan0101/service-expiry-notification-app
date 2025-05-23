@@ -11,16 +11,12 @@
 </head>
 
 <body>
-    <form action="#" class="w-screen h-screen bg-gray-200 flex justify-center items-center">
+    <form 
+        action="/auth/register" 
+        class="w-screen h-screen bg-gray-200 flex justify-center items-center"
+    >
         <div class="w-96 bg-white flex flex-col justify-center items-center gap-4 py-4 px-5 rounded-lg">
             <h1 class="font-bold text-2xl">Register</h1>
-            <div class="self-start w-full">
-                <label for="email">Full Name</label>
-                <div class="border px-1">
-                    <i class="fa-solid fa-user text-gray-400"></i>
-                    <input type="text" name="email" id="email" class="w-60 px-2 py-1 outline-none">
-                </div>
-            </div>
             <div class="self-start w-full">
                 <label for="email">Email</label>
                 <div class="border px-1">
@@ -29,17 +25,17 @@
                 </div>
             </div>
             <div class="self-start w-full">
-                <label for="email">Password</label>
+                <label for="password">Password</label>
                 <div class="border px-1">
                     <i class="fa-solid fa-lock text-gray-400"></i>
-                    <input type="password" name="email" id="email" class="w-60 px-2 py-1 outline-none">
+                    <input type="password" name="password" id="password" class="w-60 px-2 py-1 outline-none">
                 </div>
             </div>
             <div class="self-start w-full">
-                <label for="email">Confirm Passsword</label>
+                <label for="c_passsword">Confirm Passsword</label>
                 <div class="border px-1">
                     <i class="fa-solid fa-lock text-gray-400"></i>
-                    <input type="password" name="email" id="email" class="w-60 px-2 py-1 outline-none">
+                    <input type="password" name="c_passsword" id="c_passsword" class="w-60 px-2 py-1 outline-none">
                 </div>
             </div>
             <div class="w-full flex flex-row justify-between items-center">

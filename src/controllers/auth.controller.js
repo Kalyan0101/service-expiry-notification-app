@@ -1,28 +1,36 @@
 import User from "../models/User.model.js";
 
 
-class Auth {
-    async login(req, res) {
+const register = async (req, res) =>{}
 
-        const { email, password } = req.body;
+const login = async (req, res) => {
 
-        if (!email || !password) {
-            res.status(400).json("email and password both are required!");
-        }
+  console.log(req.body);
+  const { email, password } = req.body;
 
-        User.findAll({
-            where: {
-                email: email
-            },
-        });
+  return 0;
 
-    }
+  if (!email || !password) {
+    res.status(400).json("email and password both are required!");
+  }
 
-    async signup() { }
+  User.findAll({
+    where: {
+      email: email,
+    },
+  });
+};
 
-    async forgot_password() { }
+const signup = async (req, res) => {};
 
-    async logout() { }
-}
+const forgot_password = (req, res) => {};
 
-export default new Auth();
+const logout = (req, res) => {};
+
+export { 
+    register, 
+    login, 
+    signup, 
+    forgot_password, 
+    logout 
+};

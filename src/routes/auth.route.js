@@ -1,20 +1,25 @@
 import { Router } from "express";
-import authController from "../controllers/auth.controller.js";
+import {
+  register,
+  login,
+  logout,
+  forgot_password,
+} from "../controllers/auth.controller.js";
 
 const router = Router();
 
-router.get('/login', (req, res) => {
-    
-    // authController.login(req)
-    
-    res.render('../views/pages/login')
-})
+router.route("/register")
+  .get((_, res) => res.render("../views/pages/register"))
+  .post(register);
 
-router.get('/register', (req, res) => {
-    res.render('../views/pages/register')
-})
-router.get('/forgot_password', (req, res) => {
-    res.render('../views/pages/forgot_password')
-})
+router.route("/login")
+  .get((_, res) => res.render("../views/pages/login"))
+  .post(login);
+
+router.route("/forgot_password")
+    .get((_, res) => res.render("../views/pages/forgot_password"))
+    .post(forgot_password);
+
+router.route("/logout").post(logout);
 
 export default router;
