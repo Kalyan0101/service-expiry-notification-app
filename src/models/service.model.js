@@ -1,4 +1,4 @@
-import db_object from "../config/db.config.js";
+import db_object from "../DB/db.config.js";
 import { DataTypes } from "sequelize";
 
 const Service = db_object.define("Service", {
