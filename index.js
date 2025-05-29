@@ -2,8 +2,8 @@ import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import session from 'express-session';
-import db_connect from './src/DB/db.connect.js';
-import { session_store } from './src/DB/db.config.js';
+import db_connect from './DB/db.connect.js';
+import { session_store } from './DB/db.config.js';
 
 const app = express();
 
@@ -11,7 +11,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'src/views'));
+app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -31,9 +31,9 @@ app.use(
 app.use('/static', express.static(path.join(__dirname, 'public')));
 
 
-import auth_router from './src/routes/auth.route.js';
-import user_router from './src/routes/user.route.js';
-import customer_router from './src/routes/customer.route.js';
+import auth_router from './routes/auth.route.js';
+import user_router from './routes/user.route.js';
+import customer_router from './routes/customer.route.js';
 
 app.use('/auth', auth_router);
 
