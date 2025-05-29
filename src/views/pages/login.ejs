@@ -7,36 +7,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <title>Login</title>
 </head>
 
 <body>
-    <form 
-        action="/auth/login" 
-        method="post" 
-        class="w-screen h-screen bg-gray-200 flex justify-center items-center"
-    >
+    <form action="/auth/login" method="POST" class="w-screen h-screen bg-gray-200 flex justify-center items-center">
         <div class="w-96 bg-white flex flex-col justify-center items-center gap-4 py-4 px-5 rounded-lg">
             <h1 class="font-bold text-2xl">Login</h1>
-            <div class="self-start w-full">
-                <label for="email">Email:</label>
-                <div class="flex items-center border rounded">
-                    <i class="fa-solid fa-envelope text-gray-400 px-2"></i>
-                    <input type="text" name="email" id="email" class="w-full px-2 py-1 outline-none">
+
+            <% if (message) { %>
+                <div class="font-bold text-red-500">
+                    <%= message %>
                 </div>
-            </div>
-            <div class="self-start w-full">
-                <label for="password">Password:</label>
-                <div class="flex items-center border rounded">
-                    <i class="fa-solid fa-lock text-gray-400 px-2"></i>
-                    <input type="password" name="password" id="password" class="w-full px-2 py-1 outline-none">
-                </div>
-            </div>
-            <p class="w-full flex justify-between text-blue-500">
-                <a href="/auth/forgot_password">Forgot Password?</a>
-                <a href="/auth/register">Register</a>
-            </p>
-            <button type="submit" class="w-full bg-blue-600 text-white rounded py-0.5">Login</button>
+                <% } %>
+
+                    <div class="self-start w-full">
+                        <label for="email">Email:</label>
+                        <div class="flex items-center border rounded">
+                            <i class="fa-solid fa-envelope text-gray-400 px-2"></i>
+                            <input type="text" name="email" id="email" class="w-full px-2 py-1 outline-none" <% if
+                                (form_data) { %>
+                            value="<%= form_data?.email || "" %>"
+                                <% } %>
+                                    >
+                        </div>
+                    </div>
+                    <div class="self-start w-full">
+                        <label for="password">Password:</label>
+                        <div class="flex items-center border rounded">
+                            <i class="fa-solid fa-lock text-gray-400 px-2"></i>
+                            <input type="password" name="password" id="password" class="w-full px-2 py-1 outline-none">
+                        </div>
+                    </div>
+                    <p class="w-full flex justify-between text-blue-500">
+                        <a href="/auth/forgot_password">Forgot Password?</a>
+                        <a href="/auth/register">Register</a>
+                    </p>
+                    <button type="submit" class="w-full bg-blue-600 text-white rounded py-0.5">Login</button>
         </div>
     </form>
 </body>

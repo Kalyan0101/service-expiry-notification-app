@@ -12,12 +12,19 @@
 <body>
     <section class="p-5 bg-gray-100">
         <!-- head -->
-        <div class="flex justify-start items-center mb-5">
+        <div class="flex justify-between items-center mb-5">
             <!-- search box -->
             <div class="border pl-3 rounded-lg bg-white">
                 <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
                 <input type="text" name="search" id="search" placeholder="Search users..." class="w-[18rem] px-2 py-1 outline-none rounded-lg">
             </div>
+            <a 
+                href="/add_customer"
+                class="bg-blue-500 text-white font-semibold py-1 px-3 rounded hover:bg-blue-400"
+            >
+                <img width="32" height="32" src="https://img.icons8.com/windows/32/FFFFFF/plus-math.png" alt="plus-math" class="inline"/>
+                Add
+            </a>
         </div>
 
         <!-- body -->
@@ -28,7 +35,8 @@
                         <td class="p-2">ID</td>
                         <td>Name</td>
                         <td>Email</td>
-                        <td>Role</td>
+                        <td>Gender</td>
+                        <td>service(s)</td>
                         <td>Actions</td>
                     </tr>
                 </thead>
@@ -40,6 +48,6 @@
     </section>
 </body>
 
-<script type="module" src="/static/js/manage_user.js"></script>
+<script type="module" src="/static/js/customer.js"></script>
 
 </html>

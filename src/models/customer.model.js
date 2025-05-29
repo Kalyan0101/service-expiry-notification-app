@@ -1,4 +1,4 @@
-import db_object from "../config/db.config";
+import db_object from "../DB/db.config.js";
 import { DataTypes } from "sequelize";
 
 const Customer = db_object.define("Customer", {

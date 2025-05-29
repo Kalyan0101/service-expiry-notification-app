@@ -14,7 +14,7 @@
         <h1 class="pb-5 font-bold text-xl">Admin Panel</h1>
         <div class="flex flex-col gap-3">
 
-            <a href="/" class="hover:bg-gray-500 px-2 py-1">
+            <a href="/dashboard" class="hover:bg-gray-500 px-2 py-1">
                 <i class="fa-solid fa-house"></i> Dashboard
             </a>
 
@@ -22,22 +22,23 @@
                 <i class="fa-solid fa-users"></i> Users
             </a>
 
-            <a href="#" class="hover:bg-gray-500 px-2 py-1">
+            <a href="/service" class="hover:bg-gray-500 px-2 py-1">
                 <i class="fa-solid fa-layer-group"></i> Services
             </a>
 
-            <a href="#" class="hover:bg-gray-500 px-2 py-1">
+            <a href="/order" class="hover:bg-gray-500 px-2 py-1">
                 <i class="fa-solid fa-cart-shopping"></i> Orders
             </a>
 
-            <a href="#" class="hover:bg-gray-500 px-2 py-1">
+            <a href="/customer" class="hover:bg-gray-500 px-2 py-1">
                 <i class="fa-solid fa-user-tie"></i> Customers
             </a>
 
-            <a href="/auth/login" class="hover:bg-gray-500 px-2 py-1">
+            <button id="logout" class="hover:bg-gray-500 px-2 py-1 cursor-pointer text-left">
                 <i class="fa-solid fa-right-from-bracket"></i> Logout
-            </a>
+            </button>
         </div>
     </aside>
 </body>
+<script type="module" src="/static/js/sidebar.js"></script>
 </html>

@@ -4,9 +4,7 @@ import "../models/associations.js";
 const db_connect = async() => {
     try {
         await db_object.authenticate();
-        const sync = await db_object.sync({ alter: true });
-
-        // console.log(`\n\nsync: ${ JSON.stringify(sync) }`);
+        // await db_object.sync({ force: true });
         
     } catch (error) {
         console.log(`connect: ${error}`);
