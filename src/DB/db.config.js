@@ -1,23 +1,17 @@
 import { Sequelize } from "sequelize";
 import expressMysqlSession  from "express-mysql-session";
 import session from "express-session";
-import 'dotenv/config'
+import dotenv from 'dotenv'
 
-// console.log(process.env);
+dotenv.config();
 
-
-const db_object = new Sequelize(process.env.MYSQL_URL, {
+const db_object = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
     dialect: "mysql"
 });
 
-// const db_object = new Sequelize("service_expiry_app", "root", "Password@123", {
-//     host: "localhost",
-//     dialect: "mysql"
-// });
-
 const MySQLStore = expressMysqlSession(session);
-
-// const session_store =  new MySQLStore(process.env.MYSQL_URL)
 
 const session_store =  new MySQLStore({
     host: process.env.DB_HOST,
