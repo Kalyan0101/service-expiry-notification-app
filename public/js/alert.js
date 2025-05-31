@@ -24,14 +24,14 @@ const error_alert = (message = "Something went Wrong!") => {
     });
 }
 
-const confirmation = async () => {
+const confirmation = async (text = 'Logout') => {
     const result = await Swal.fire({
         title: "Are you sure?",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Logout"
+        confirmButtonText: text
     })
 
     return result.isConfirmed;

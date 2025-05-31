@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <section class="p-5 bg-gray-100">
+        <!-- head -->
+        <div class="flex justify-start items-center mb-5">
+            <!-- search box -->
+            <div class="border pl-3 rounded-lg bg-white">
+                <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
+                <input type="text" name="search" id="search" placeholder="Search users..." class="w-[18rem] px-2 py-1 outline-none rounded-lg">
+            </div>
+        </div>
+
+        <!-- body -->
+         <div class="w-full">
+            <table class="w-full">
+                <thead class="bg-red-500">
+                    <tr class="font-bold bg-gray-200">
+                        <td class="p-2">ID</td>
+                        <td>Name</td>
+                        <td>Email</td>
+                        <td>Role</td>
+                        <td>Actions</td>
+                    </tr>
+                </thead>
+                <tbody id="userTableBody">
+                    
+                </tbody>
+            </table>
+         </div>
+    </section>
+</body>
+<script>
+    window.user_id = `<%- data.id %>`;
+</script>
+<script type="module" src="/static/js/user.js"></script>
+
+</html>
