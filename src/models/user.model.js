@@ -1,4 +1,4 @@
-import db_object from "../DB/db.config.js";
+import {db_object} from "../DB/index.js";
 import { DataTypes } from "sequelize";
 
 const User = db_object.define("User", {
@@ -15,6 +15,9 @@ const User = db_object.define("User", {
         type: DataTypes.STRING,
         allowNull: false
     }
+}, {
+    timestamps: true,
+    paranoid: true
 });
 
 export default User;

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body>
+    <section class="p-5 bg-gray-100">
+      <!-- head -->
+      <div class="flex justify-start items-center mb-5">
+        <!-- search box -->
+        <!-- <div class="border pl-3 rounded-lg bg-white">
+          <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
+          <input
+            type="text"
+            name="search"
+            id="search"
+            placeholder="Search users..."
+            class="w-[18rem] px-2 py-1 outline-none rounded-lg"
+          />
+        </div> -->
+        <a
+          href="/service/add_service"
+          class="bg-blue-500 text-white font-semibold py-1 px-3 rounded hover:bg-blue-400"
+        >
+          <img
+            width="32"
+            height="32"
+            src="https://img.icons8.com/windows/32/FFFFFF/plus-math.png"
+            alt="plus-math"
+            class="inline"
+          />
+          Add
+        </a>
+      </div>
+
+      <!-- body -->
+      <div class="w-full">
+        <table class="w-full">
+          <thead class="bg-red-500">
+            <tr class="font-bold bg-gray-200">
+              <td class="p-2">ID</td>
+              <td>Name</td>
+              <td>description</td>
+              <td>price</td>
+              <td>validity</td>
+              <td>user id</td>
+              <td>action</td>
+            </tr>
+          </thead>
+          <tbody id="serviceTableBody"></tbody>
+        </table>
+      </div>
+      <div
+        id="editModal"
+        class="fixed inset-0 items-center justify-center bg-black bg-opacity-50 z-50 hidden"
+      >
+        <div class="bg-white p-6 rounded shadow-lg w-full max-w-md relative">
+          <button
+            id="editModalCloseBtn"
+            type="button"
+            class="absolute top-2 right-2 text-gray-500 hover:text-red-500 text-2xl font-bold focus:outline-none"
+          >
+            &times;
+          </button>
+          <h2 class="text-xl font-bold mb-4">Edit Service</h2>
+          <!-- ...edit form... -->
+          <form id="editServiceForm">
+            <input type="hidden" id="edit_id" name="id" />
+            <div class="mb-2">
+              <label>Name</label>
+              <input
+                type="text"
+                id="edit_name"
+                name="name"
+                class="w-full border rounded px-2 py-1"
+                required
+              />
+            </div>
+            <div class="mb-2">
+              <label>Description</label>
+              <input
+                type="text"
+                id="edit_description"
+                name="description"
+                class="w-full border rounded px-2 py-1"
+                required
+              />
+            </div>
+            <div class="mb-2">
+              <label>Price</label>
+              <input
+                type="number"
+                id="edit_price"
+                name="price"
+                class="w-full border rounded px-2 py-1"
+                required
+              />
+            </div>
+            <div class="mb-2">
+              <label>Validity</label>
+              <input
+                type="text"
+                id="edit_validity"
+                name="validity"
+                class="w-full border rounded px-2 py-1"
+                required
+              />
+            </div>
+            <div class="mb-2">
+              <label>User ID</label>
+              <input
+                type="text"
+                id="edit_user_id"
+                name="user_id"
+                class="w-full border rounded px-2 py-1"
+                required
+              />
+            </div>
+            <div class="flex justify-end gap-2 mt-4">
+              <button
+                type="button"
+                id="closeEditModal"
+                class="px-4 py-2 bg-gray-300 rounded"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                class="px-4 py-2 bg-blue-500 text-white rounded"
+              >
+                Update
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </body>
+
+  <script type="module" src="/static/js/manage_service.js"></script>
+</html>

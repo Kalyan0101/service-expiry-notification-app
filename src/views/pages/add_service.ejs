@@ -1,0 +1,62 @@
+<section class="h-max p-5 bg-gray-100 flex justify-center items-center">
+  <form
+    id="addServiceForm"
+    class="bg-white py-5 px-3 flex flex-col justify-start items-start gap-5"
+  >
+    <div class="w-full flex items-center justify-between">
+      <label for="fullname">Name:</label>
+      <input
+        type="text"
+        name="serviceName"
+        id="ServiceName"
+        required
+        class="w-[75%] border outline-none px-2 py-1"
+      />
+    </div>
+
+    <div class="w-full flex items-center justify-between">
+      <label for="email">Description:</label>
+      <textarea
+        id="description"
+        name="description"
+        class="w-[75%] border outline-none px-2 py-1"
+        required
+      ></textarea>
+    </div>
+
+    <div class="w-full flex flex-row items-center justify-between">
+      <label for="ph_number">Price:</label>
+      <input
+        type="number"
+        name="price"
+        id="price"
+        class="w-[75%] border outline-none px-2 py-1"
+      />
+    </div>
+
+    <div class="w-full flex flex-row items-center justify-between">
+      <label for="validity">Validity (in days):</label>
+      <input
+        type="number"
+        name="validity"
+        id="validity"
+        class="w-[75%] border outline-none px-2 py-1"
+      />
+    </div>
+
+    <div
+      class="text-white w-full text-center flex items-center justify-around mt-7"
+    >
+      <button type="reset" class="bg-red-500 text-lg px-4 py-2 rounded">
+        Reset
+      </button>
+      <button
+        type="submit"
+        class="w-[60%] bg-blue-500 text-lg font-bold px-3 py-2 rounded"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+</section>
+<script type="module" src="/static/js/add_service.js"></script>

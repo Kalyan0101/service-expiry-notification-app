@@ -1,4 +1,4 @@
-import db_object from "./db.config.js";
+import {db_object} from "./index.js";
 import "../models/associations.js";
 
 const db_connect = async() => {
@@ -7,7 +7,7 @@ const db_connect = async() => {
         // await db_object.sync({ force: true });
         
     } catch (error) {
-        console.log(`connect: ${error}`);
+        console.log(`connection Error: ${error}`);
     }
 }
 

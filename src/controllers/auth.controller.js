@@ -144,7 +144,6 @@ const logout = async_handler(async (req, res) => {
 		console.log(err);
 		return res.json(true)
 	})
-
 });
 
 

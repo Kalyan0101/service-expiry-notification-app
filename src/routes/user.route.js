@@ -6,7 +6,6 @@ import { async_handler } from "../utils/async_handler.js";
 import User from "../models/user.model.js";
 import upload from "../middleware/multer.middleware.js";
 
-
 const router = Router();
 
 router.get('/dashboard', auth_session, async (req, res) => {
@@ -24,26 +23,6 @@ router.get('/user', auth_session, async (req, res) => {
     const content = await render_page('user', user)
     res.render('../views/layout', {
         title: "Manage User",
-        body: content,
-        user
-    })
-})
-
-router.get('/customer', auth_session, async (req, res) => {
-    const content = await render_page('customer')
-    const user = await req.session.user || "";
-    res.render('../views/layout', {
-        title: "Customer",
-        body: content,
-        user
-    })
-})
-
-router.get('/add_customer', auth_session, async (req, res) => {
-    const user = await req.session.user || "";
-    const content = await render_page('add_customer')
-    res.render('../views/layout', {
-        title: "Add Customer",
         body: content,
         user
     })

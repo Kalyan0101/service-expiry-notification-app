@@ -1,53 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <section class="p-5 bg-gray-100">
-        <!-- head -->
-        <div class="flex justify-between items-center mb-5">
-            <!-- search box -->
-            <div class="border pl-3 rounded-lg bg-white">
-                <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
-                <input type="text" name="search" id="search" placeholder="Search users..." class="w-[18rem] px-2 py-1 outline-none rounded-lg">
-            </div>
-            <a 
-                href="/add_customer"
-                class="bg-blue-500 text-white font-semibold py-1 px-3 rounded hover:bg-blue-400"
-            >
-                <img width="32" height="32" src="https://img.icons8.com/windows/32/FFFFFF/plus-math.png" alt="plus-math" class="inline"/>
-                Add
-            </a>
+      <!-- head -->
+      <div class="flex justify-between items-center mb-5">
+        <!-- search box -->
+        <div class="border pl-3 rounded-lg bg-white">
+          <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
+          <input
+            type="text"
+            name="search"
+            id="search"
+            placeholder="Search users..."
+            class="w-[18rem] px-2 py-1 outline-none rounded-lg"
+          />
         </div>
+        <a
+          href="/customer/add_customer"
+          class="bg-blue-500 text-white font-semibold py-1 px-3 rounded hover:bg-blue-400"
+        >
+          <img
+            width="32"
+            height="32"
+            src="https://img.icons8.com/windows/32/FFFFFF/plus-math.png"
+            alt="plus-math"
+            class="inline"
+          />
+          Add
+        </a>
+      </div>
 
-        <!-- body -->
-         <div class="w-full">
-            <table class="w-full">
-                <thead class="bg-red-500">
-                    <tr class="font-bold bg-gray-200">
-                        <td class="p-2">ID</td>
-                        <td>Name</td>
-                        <td>Email</td>
-                        <td>Gender</td>
-                        <td>service(s)</td>
-                        <td>Actions</td>
-                    </tr>
-                </thead>
-                <tbody id="userTableBody">
-                    
-                </tbody>
-            </table>
-         </div>
+      <!-- body -->
+      <div class="w-full">
+        <table class="w-full">
+          <thead class="bg-red-500">
+            <tr class="font-bold bg-gray-200">
+              <td class="p-2">ID</td>
+              <td>Name</td>
+              <td>Email</td>
+              <td>Phone Number</td>
+              <!-- <td>service(s)</td> -->
+              <td>Actions</td>
+            </tr>
+          </thead>
+          <tbody id="customerTableBody"></tbody>
+        </table>
+      </div>
+      <!-- Customer Detail Modal -->
+      <div
+        id="customerDetailModal"
+        class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center hidden z-50"
+      >
+        <div class="bg-white rounded p-6 w-full max-w-md">
+          <h2 class="text-xl font-bold mb-4">Customer Details</h2>
+          <div id="customerDetailContent">
+            <!-- Details will be injected here -->
+          </div>
+          <button
+            id="closeCustomerDetailModal"
+            class="mt-4 px-4 py-2 bg-gray-300 rounded"
+          >
+            Close
+          </button>
+        </div>
+      </div>
     </section>
-</body>
+  </body>
 
-<script type="module" src="/static/js/customer.js"></script>
-
+  <script type="module" src="/static/js/customer.js"></script>
 </html>

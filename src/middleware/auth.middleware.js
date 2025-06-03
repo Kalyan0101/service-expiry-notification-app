@@ -1,19 +1,16 @@
 const auth_session = (req, res, next) => {
+  // console.log("middleware"); // FLAG:
+  // console.log(req.session.user); // FLAG:
 
-    // console.log("middleware"); // FLAG:
-    // console.log(req.session.user); // FLAG:
+  try {
+    const user = req?.session?.user || "";
 
-    try {
+    if (!user) return res.redirect("/auth/login");
 
-        const user = req?.session?.user || "";
-        
-        if(!user) return res.redirect("/auth/login");
-
-        next();
-
-    } catch (error) {
-        console.log("authentication error: ",error);        
-    }
-}
+    next();
+  } catch (error) {
+    console.log("authentication error: ", error);
+  }
+};
 
 export default auth_session;

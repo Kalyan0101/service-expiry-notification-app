@@ -1,19 +1,19 @@
-import db_object from "../DB/db.config.js";
+import { db_object } from "../DB/index.js";
 import { DataTypes } from "sequelize";
 
 const Order = db_object.define("Order", {
-    purchase_date: {
-        type: DataTypes.DATE,
-        allowNull: false
-    },
-    cusomer_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
-    user_id: {
-        type: DataTypes.NUMBER,
-        allowNull: false
-    }
-})
+  purchase_date: {
+    type: DataTypes.DATE,
+    allowNull: false,
+  },
+  customer_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  user_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+});
 
 export default Order;
