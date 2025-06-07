@@ -7,7 +7,7 @@ import pg from "pg";
 
 // LOCAL MYSQL DB**************************************************
 
-const db_object = new Sequelize("service_expiry_app", "root", "Password@123", {
+const db_object = new Sequelize("service_expiry_app", "root", "1111", {
     host: "localhost",
     dialect: "mysql"
 });
@@ -33,7 +33,7 @@ const MySQLStore = expressMysqlSession(session);
 const session_store =  new MySQLStore({
     host: "localhost",
     user: "root",
-    password: "Password@123",
+    password: "1111",
     database: "service_expiry_app",
     port: 3306
 })

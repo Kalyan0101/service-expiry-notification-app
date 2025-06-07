@@ -12,18 +12,22 @@
   </head>
 
   <body>
-    <section class="p-5 bg-gray-100">
+    <section class="p-2 sm:p-5 bg-gray-100 min-h-screen">
       <!-- head -->
-      <div class="flex justify-between items-center mb-5">
+      <div
+        class="flex flex-col sm:flex-row justify-between items-center mb-5 gap-3"
+      >
         <!-- search box -->
-        <div class="border pl-3 rounded-lg bg-white">
+        <div
+          class="border pl-3 rounded-lg bg-white w-full sm:w-auto flex items-center"
+        >
           <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
           <input
             type="text"
             name="search"
             id="search"
             placeholder="Search users..."
-            class="w-[18rem] px-2 py-1 outline-none rounded-lg"
+            class="w-full sm:w-[18rem] px-2 py-1 outline-none rounded-lg"
           />
         </div>
         <a
@@ -31,8 +35,8 @@
           class="bg-blue-500 text-white font-semibold py-1 px-3 rounded hover:bg-blue-400"
         >
           <img
-            width="32"
-            height="32"
+            width="24"
+            height="24"
             src="https://img.icons8.com/windows/32/FFFFFF/plus-math.png"
             alt="plus-math"
             class="inline"
@@ -42,15 +46,15 @@
       </div>
 
       <!-- body -->
-      <div class="w-full">
-        <table class="w-full">
+      <div class="w-full overflow-x-auto">
+        <table class="w-full min-w-[600px]">
           <thead class="bg-red-500">
             <tr class="font-bold bg-gray-200">
               <td class="p-2">ID</td>
               <td>Name</td>
               <td>Email</td>
               <td>Phone Number</td>
-              <!-- <td>service(s)</td> -->
+              <td>service(s)</td>
               <td>Actions</td>
             </tr>
           </thead>
@@ -60,7 +64,7 @@
       <!-- Customer Detail Modal -->
       <div
         id="customerDetailModal"
-        class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center hidden z-50"
+        class="fixed inset-0 flex bg-black bg-opacity-50 items-center justify-center hidden z-50"
       >
         <div class="bg-white rounded p-6 w-full max-w-md">
           <h2 class="text-xl font-bold mb-4">Customer Details</h2>
@@ -73,6 +77,64 @@
           >
             Close
           </button>
+        </div>
+      </div>
+      <!-- edit customer model with prefilled data -->
+      <div
+        id="editCustomerModal"
+        class="fixed inset-0 flex bg-black bg-opacity-50 items-center justify-center hidden z-50"
+      >
+        <div class="bg-white rounded p-6 w-full max-w-md relative">
+          <h2 class="text-xl font-bold mb-4">Edit Customer</h2>
+          <form id="editCustomerForm">
+            <input type="hidden" id="edit_customer_id" name="id" />
+            <div class="mb-2">
+              <label>Name</label>
+              <input
+                type="text"
+                id="edit_name"
+                name="name"
+                class="w-full border rounded px-2 py-1"
+                required
+              />
+            </div>
+
+            <div class="mb-2">
+              <label>Phone Number</label>
+              <input
+                type="text"
+                id="edit_ph_number"
+                name="ph_number"
+                class="w-full border rounded px-2 py-1"
+                required
+              />
+            </div>
+            <div class="mb-2">
+              <label>Address</label>
+              <input
+                type="text"
+                id="edit_address"
+                name="address"
+                class="w-full border rounded px-2 py-1"
+              />
+            </div>
+            <!-- Add more fields as needed -->
+            <div class="flex justify-end gap-2 mt-4">
+              <button
+                type="button"
+                id="closeEditCustomerModal"
+                class="px-4 py-2 bg-gray-300 rounded"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                class="px-4 py-2 bg-blue-500 text-white rounded"
+              >
+                Save
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </section>

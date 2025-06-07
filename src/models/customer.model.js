@@ -24,7 +24,7 @@ const Customer = db_object.define("Customer", {
     allowNull: false,
   },
   ph_number: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.INTEGER.UNSIGNED,
     allowNull: false,
     unique: true,
   },

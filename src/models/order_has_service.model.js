@@ -4,6 +4,11 @@ import Order from "./order.model.js";
 import Service from "./service.model.js";
 
 const OrderHasService = db_object.define("OrderHasService", {
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
   order_id: {
     type: DataTypes.INTEGER,
     references: {

@@ -32,7 +32,9 @@ addService.onsubmit = (e) => {
         data.message.toLowerCase().includes("service created successfully")
       ) {
         success_alert(data.message);
-        addService.reset();
+        // addService.reset();
+        window.location.href = "/service";
+        console.log("Service created successfully:", data);
       } else {
         error_alert(
           data.message || "Something went wrong while creating the service."

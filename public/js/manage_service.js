@@ -8,7 +8,7 @@ const all_Services = () => {
     .then((res) => res.json())
     .then((data) => {
       serviceTableBody.innerHTML = ""; // Clear previous rows
-      data.allServices?.map((service, i) => {
+      data?.map((service, i) => {
         const tr = document.createElement("tr");
         tr.innerHTML = `
           <td class="p-2">${i + 1}</td>

@@ -5,7 +5,7 @@ import Customer from "./models/customer.model.js";
 
 import sendMAil from "./utils/send_mail.js";
 
-cron.schedule("0 8 * * *", async () => {
+cron.schedule("0 12 * * *", async () => {
   try {
     const today = new Date();
     const orders = await Order.findAll({

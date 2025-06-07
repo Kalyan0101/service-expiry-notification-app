@@ -1,162 +1,148 @@
-<main class="max-w-full p-5 bg-gray-100 flex flex-col justify-start items-start gap-3">
-    <!-- first row -->
-    <section class="w-full flex flex-row justify-between items-center gap-3">
-        <div class="bg-white w-full rounded py-3 px-2 font-bold">
-            <p>Total Users</p>
-            <h3 class="text-blue-600">1,234</h3>
-        </div>
-        <div class="bg-white w-full rounded py-3 px-2 font-bold">
-            <p>Active Service</p>
-            <h3 class="text-green-600">567</h3>
-        </div>
-        <div class="bg-white w-full rounded py-3 px-2 font-bold">
-            <p>Total Orders</p>
-            <h3 class="text-yellow-600">89</h3>
-        </div>
-        <div class="bg-white w-full rounded py-3 px-2 font-bold">
-            <p>Total Customer</p>
-            <h3 class="text-purple-600">2345</h3>
-        </div>
-    </section>
+<main
+  class="max-w-full p-5 bg-gray-100 flex flex-col justify-start items-start gap-3"
+>
+  <!-- first row -->
+  <section class="w-full flex flex-row justify-between items-center gap-3">
+    <div class="bg-white w-full rounded py-3 px-2 font-bold">
+      <p>Total Users</p>
+      <h3 class="text-blue-600"><span id="total_users"></span></h3>
+    </div>
+    <div class="bg-white w-full rounded py-3 px-2 font-bold">
+      <p>Active Service</p>
+      <h3 class="text-green-600"><span id="total_services"></span></h3>
+    </div>
+    <div class="bg-white w-full rounded py-3 px-2 font-bold">
+      <p>Total Orders</p>
+      <h3 class="text-yellow-600"><span id="total_orders"></span></h3>
+    </div>
+    <div class="bg-white w-full rounded py-3 px-2 font-bold">
+      <p>Total Customer</p>
+      <h3 class="text-purple-600"><span id="total_customers"></span></h3>
+    </div>
+  </section>
 
-    <!-- second row -->
-    <section class="w-full bg-white p-3 rounded flex flex-col gap-2">
-        <h2 class="font-bold">Recent Activity</h2>
-        <div class="w-full flex justify-between items-center">
-            <p>New user registered: <span>John Doe</span></p>
-            <p class="text-gray-500">2 hours ago</p>
-        </div>
-        <div class="w-full flex justify-between items-center">
-            <p>Service Renew: <span>Premium Plan</span></p>
-            <p class="text-gray-500">5 hours ago</p>
-        </div>
-        <div class="w-full flex justify-between items-center">
-            <p>Order Placed: <span>#12345</span></p>
-            <p class="text-gray-500">1 day ago</p>
-        </div>
-    </section>
+  <!-- second row -->
+  <section class="w-full bg-white p-3 rounded flex flex-col gap-2">
+    <h2 class="font-bold">Recent Activity</h2>
+    <div class="w-full flex justify-between items-center">
+      <p>New user registered: <span>John Doe</span></p>
+      <p class="text-gray-500">2 hours ago</p>
+    </div>
+    <div class="w-full flex justify-between items-center">
+      <p>Service Renew: <span>Premium Plan</span></p>
+      <p class="text-gray-500">5 hours ago</p>
+    </div>
+    <div class="w-full flex justify-between items-center">
+      <p>Order Placed: <span>#12345</span></p>
+      <p class="text-gray-500">1 day ago</p>
+    </div>
+  </section>
 
-    <!-- third row -->
-    <section class="w-full bg-white p-3">
-        <!-- head -->
-        <div class="w-full flex justify-between items-center mb-3">
-            <h2 class="font-bold">Services Expiring in Next 15 Days</h2>
-            <!-- search box -->
-            <div class="border px-1">
-                <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
-                <input type="text" name="search" id="search" placeholder="Search..."
-                    class="w-60 px-2 py-1 outline-none">
-            </div>
-        </div>
-        <!-- body -->
-        <table class="w-full">
-            <thead class="bg-gray-200">
-                <tr class="font-bold">
-                    <td class="py-1 px-2">Customer</td>
-                    <td>Service</td>
-                    <td>Expiry Date</td>
-                    <td>Action</td>
-                </tr>
-            </thead>
-            <tbody class="">
-                <tr>
-                    <td class="py-2">Alice Johnson</td>
-                    <td>Premium Plan</td>
-                    <td>2025-05-15</td>
-                    <td class="text-blue-500">
-                        <a href="#">
-                            <i class="fa-solid fa-bell pr-1"></i>
-                            Notify
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="py-2">Alice Johnson</td>
-                    <td>Premium Plan</td>
-                    <td>2025-05-15</td>
-                    <td class="text-blue-500">
-                        <a href="#">
-                            <i class="fa-solid fa-bell pr-1"></i>
-                            Notify
-                        </a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <!-- pagination -->
-        <div class="w-full flex justify-between items-center mt-3">
-            <p> Showing 1 to 5 of 10 entries</p>
-            <div class="">
-                <button class="py-1 px-2 bg-gray-200 rounded text-gray-400">previous</button>
-                <button class="py-1 px-2 bg-blue-500 rounded">1</button>
-                <button class="py-1 px-2 bg-gray-200 rounded">2</button>
-                <button class="py-1 px-2 bg-gray-200 rounded">Next</button>
-            </div>
-        </div>
-    </section>
+  <!-- third row -->
+  <section class="w-full bg-white p-3">
+    <!-- head -->
+    <div class="w-full flex flex-row justify-between items-center mb-3 gap-2">
+      <h2 class="font-bold">Services Expiring in Next 15 Days</h2>
+      <!-- search box -->
+      <div class="border px-1 flex items-center">
+        <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
+        <input
+          type="text"
+          name="search"
+          id="search15"
+          placeholder="Search..."
+          class="w-40 px-2 py-1 outline-none"
+        />
+      </div>
+    </div>
+    <!-- body -->
+    <table class="w-full overflow-x-auto">
+      <thead class="bg-gray-200">
+        <tr class="font-bold">
+          <td class="py-1 px-2">Order Id</td>
+          <td>Customer</td>
+          <td>Email</td>
+          <td>Service</td>
+          <td>Price</td>
+          <td>Expiry Date</td>
+        </tr>
+      </thead>
+      <tbody id="15_expiryTableBody"></tbody>
+    </table>
+    <!-- pagination -->
+    <div class="w-full flex justify-between items-center mt-3">
+      <p id="paginationINfo"></p>
+      <div id="pagination15" class="flex gap-2"></div>
+      <div class="flex gap-2">
+        <button
+          id="prevPage15"
+          class="px-2 py-1 bg-blue-500 text-white rounded"
+        >
+          Previous
+        </button>
+        <button
+          id="nextPage15"
+          class="px-2 py-1 bg-blue-500 text-white rounded"
+        >
+          Next
+        </button>
+      </div>
+    </div>
+  </section>
 
-    <!-- forth row -->
-    <section class="w-full bg-white p-3">
-        <!-- head -->
-        <div class="w-full flex justify-between items-center mb-3">
-            <h2 class="font-bold">Services Expiring in 30 Days</h2>
-            <!-- search box -->
-            <div class="border px-1">
-                <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
-                <input type="text" name="search" id="search" placeholder="Search..."
-                    class="w-60 px-2 py-1 outline-none">
-            </div>
-        </div>
-        <!-- body -->
-        <table class="w-full">
-            <thead class="bg-gray-200">
-                <tr class="font-bold">
-                    <td class="py-1 px-2">Customer</td>
-                    <td>Service</td>
-                    <td>Expiry Date</td>
-                    <td>Action</td>
-                </tr>
-            </thead>
-            <tbody class="">
-                <tr>
-                    <td class="py-2">Alice Johnson</td>
-                    <td>Premium Plan</td>
-                    <td>2025-05-15</td>
-                    <td class="text-green-500">
-                        <a href="#">
-                            <i class="fa-solid fa-arrow-rotate-right pr-1"></i>
-                            Renew
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="py-2">Alice Johnson</td>
-                    <td>Premium Plan</td>
-                    <td>2025-05-15</td>
-                    <td class="text-green-500">
-                        <a href="#">
-                            <i class="fa-solid fa-arrow-rotate-right pr-1"></i>
-                            Renew
-                        </a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <!-- pagination -->
-        <div class="w-full flex justify-between items-center mt-3">
-            <p> Showing 1 to 5 of 10 entries</p>
-            <div class="">
-                <button class="py-1 px-2 bg-gray-200 rounded text-gray-400">previous</button>
-                <button class="py-1 px-2 bg-blue-500 rounded">1</button>
-                <button class="py-1 px-2 bg-gray-200 rounded">2</button>
-                <button class="py-1 px-2 bg-gray-200 rounded">Next</button>
-            </div>
-        </div>
-    </section>
+  <!-- forth row -->
+  <section class="w-full bg-white p-3">
+    <!-- head -->
+    <div class="w-full flex flex-row justify-between items-center mb-3 gap-2">
+      <h2 class="font-bold">Services Expiring in 30 Days</h2>
+      <!-- search box -->
+      <div class="border px-1">
+        <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
+        <input
+          type="text"
+          name="search"
+          id="search30"
+          placeholder="Search..."
+          class="w-60 px-2 py-1 outline-none"
+        />
+      </div>
+    </div>
+    <!-- body -->
+    <table class="w-full overflow-x-auto">
+      <thead class="bg-gray-200">
+        <tr class="font-bold">
+          <td class="py-1 px-2">Order Id</td>
+          <td>Customer</td>
+          <td>Email</td>
+          <td>Service</td>
+          <td>Price</td>
+          <td>Expiry Date</td>
+        </tr>
+      </thead>
+      <tbody id="30_expiryTableBody"></tbody>
+    </table>
+    <!-- pagination -->
+    <div class="w-full flex justify-between items-center mt-3">
+      <p id="paginationINfo30"></p>
+      <div id="pagination30" class="flex gap-1"></div>
+      <div class="flex gap-2">
+        <button
+          id="prevPage30"
+          class="px-2 py-1 bg-blue-500 text-white rounded"
+        >
+          Previous
+        </button>
+        <button
+          id="nextPage30"
+          class="px-2 py-1 bg-blue-500 text-white rounded"
+        >
+          Next
+        </button>
+      </div>
+    </div>
+  </section>
 
-    <% if (data) { %>
-     <%= data.email %>
-    <% } %>
-    <!-- <script type="module" src="/static/js/sidebar.js"></script> -->
-
+  <% if (data) { %> <%= data.email %> <% } %>
+  <!-- <script type="module" src="/static/js/sidebar.js"></script> -->
 </main>
+<script type="module" src="/static/js/dashboard.js"></script>

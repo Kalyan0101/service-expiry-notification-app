@@ -37,14 +37,14 @@ router.route("/update_user")
     
     const content = await render_page('user_updation', user)
     res.render('../views/layout', {
-        title: "Update User",
+        title: "User > Update User",
         body: content,
         user: looged_user
     })
 })
 .post(auth_session, upload.none(), update_user)
 
-// json result
+// JSON result
 router.get('/all_user', auth_session, all_user);
 router.get('/delete_user', auth_session, delete_user);
 router.get('/dashboard_data', auth_session, dashboard_data);

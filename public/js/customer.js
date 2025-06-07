@@ -27,32 +27,123 @@ const all_customer = async (customerName = "") => {
     .then((res) => res.json())
     .then((data) => {
       customerTableBody.innerHTML = "";
-      data?.map((customer, i) => {
-        const tr = document.createElement("tr");
 
-        tr.innerHTML = `
-              <td class="p-2">${i + 1}</td>
-              <td>${customer.name}</td>
-              <td>${customer.email}</td>
-              <td>${customer.ph_number}</td>
-              
-              
-              <td>
+      const Customerpromise = data.map((customer, i) => {
+        return getServices(customer.id).then((serviceData) => {
+          const tr = document.createElement("tr");
+          console.log(i);
+
+          tr.innerHTML = `
+                  <td class="p-2">${i}</td>
+                  <td>${customer.name}</td>
+                  <td>${customer.email}</td>
+                  <td>${customer.ph_number}</td>
+                  <td>${serviceData}</td>
                   
-                 <i class="fa-solid fa-eye text-blue-500 cursor-pointer"
-              onclick='window.show_customer(${JSON.stringify(customer).replace(
-                /'/g,
-                "\\'"
-              )})'></i>
-                  <i class="fa-solid fa-trash text-red-500 cursor-pointer"
-   onclick="window.delete_customer(${customer.id})"></i>
-              </td>
-          `;
-        customerTableBody.appendChild(tr);
+                  
+                  <td>
+                      
+                    <i class="fa-solid fa-eye text-blue-500 cursor-pointer"
+                  onclick='window.show_customer(${JSON.stringify(
+                    customer
+                  ).replace(/'/g, "\\'")})'></i>
+                  <i class="fa-solid fa-pen-to-square text-blue-500 cursor-pointer"
+                  onclick='window.edit_Customer(${JSON.stringify(
+                    customer
+                  )})'></i>
+    
+                      <i class="fa-solid fa-trash text-red-500 cursor-pointer"
+      onclick="window.delete_customer(${customer.id})"></i>
+                  </td>
+              `;
+          return tr;
+        });
       });
+      Promise.all(Customerpromise)
+        .then((trs) => {
+          trs.forEach((tr) => {
+            customerTableBody.appendChild(tr);
+          });
+        })
+        .catch((err) => {
+          console.log("error fetching customers", err);
+        });
+    })
+    .catch((err) => {
+      console.log("error fetching customers", err);
+      customerTableBody.innerHTML = `<tr><td colspan="6" class="text-center">Error fetching customers</td></tr>`;
     });
 };
 all_customer();
+
+const editModal = document.getElementById("editCustomerModal");
+const cancelModal = document.getElementById("closeEditCustomerModal");
+
+cancelModal.onclick = () => {
+  editModal.classList.add("hidden");
+};
+
+window.edit_Customer = (customer) => {
+  document.getElementById("edit_name").value = customer.name;
+  document.getElementById("edit_ph_number").value = customer.ph_number;
+  document.getElementById("edit_address").value = customer.address;
+  document.getElementById("edit_customer_id").value = customer.id;
+  editModal.classList.remove("hidden");
+};
+editCustomerForm.onsubmit = (e) => {
+  e.preventDefault();
+  editConfirmation("Are you sure you want to edit this customer?").then(
+    (res) => {
+      if (res) {
+        try {
+          const customer_id = document.getElementById("edit_customer_id").value;
+          const data = {
+            name: document.getElementById("edit_name").value,
+            ph_number: document.getElementById("edit_ph_number").value,
+            address: document.getElementById("edit_address").value,
+          };
+          fetch(`/customer/edit_customer/${customer_id}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          })
+            .then((res) => res.json())
+            .then((cust) => {
+              if (cust.message) {
+                editModal.classList.add("hidden");
+                all_customer();
+                success_alert(cust.message);
+              } else {
+                error_alert(
+                  "something went wrong during editing the customer."
+                );
+              }
+            });
+        } catch (error) {
+          error_alert("server error");
+        }
+      }
+    }
+  );
+};
+
+const getServices = (customer_id) => {
+  return fetch(`/customer/getservices/${customer_id}`)
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.length > 0) {
+        return data.map((service) => service.name).join(", ");
+      } else {
+        return "No services";
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      return "No service";
+    });
+};
 
 //show the whole detail of the customer
 window.show_customer = async (customer) => {

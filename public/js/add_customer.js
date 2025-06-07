@@ -92,7 +92,6 @@ addCustomerForm.onsubmit = async (e) => {
   const city_id = document.getElementById("city").value;
   const gender = document.querySelector('input[name="gender"]:checked')?.value;
   const address = document.getElementById("address_line").value;
-  const service_id = document.getElementById("service").value;
 
   if (
     !name ||
@@ -102,8 +101,7 @@ addCustomerForm.onsubmit = async (e) => {
     !state_id ||
     !city_id ||
     !gender ||
-    !address ||
-    !service_id
+    !address
   ) {
     error_alert("Please fill all the fields");
     return;
@@ -117,7 +115,6 @@ addCustomerForm.onsubmit = async (e) => {
     city_id,
     gender,
     address,
-    service_id,
   };
   try {
     const res = await fetch(`/customer/create`, {
@@ -128,12 +125,12 @@ addCustomerForm.onsubmit = async (e) => {
       body: JSON.stringify(newCustomer),
     });
     const data = await res.json();
-    // console.log(data);
+    console.log(data);
     if (res.ok) {
       success_alert(data.message);
       //   console.log(data.message);
       addCustomerForm.reset();
-    } else {
+    } else if (res.status === 400) {
       error_alert(data.message);
       console.log(data.message);
     }

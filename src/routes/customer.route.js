@@ -4,7 +4,9 @@ import {
   updateCustomer,
   deleteCustomer,
   getCustomerByName,
+  getCustomerServices,
 } from "../controllers/customer.controller.js";
+import { getDayfromExpirydata, dashboard_stats } from "../controllers/dashboard.controller.js";
 import auth_session from "../middleware/auth.middleware.js";
 import render_page from "../utils/render_page.js";
 const router = Router();
@@ -31,10 +33,11 @@ router.get("/add_customer", auth_session, async (req, res) => {
 
 router.post("/create", auth_session, addCustomer);
 
-// router.get("/getallcustomer", getAllCustomer);
-// router.get("/getcustomer/:id", getAllCustomer);
-router.get("/getCustomerByName", getCustomerByName);
-router.put("/updatecustomer/:id", updateCustomer);
-router.delete("/deletecustomer/:id", deleteCustomer);
+router.get("/getCustomerByName", auth_session, getCustomerByName);
+router.put("/edit_customer/:id", auth_session, updateCustomer);
+router.delete("/deletecustomer/:id", auth_session, deleteCustomer);
+router.get("/getservices/:customer_id", getCustomerServices);
+router.get("/getcustomer/expiry/:day", getDayfromExpirydata);
+router.get("/dashboard_stats", dashboard_stats);
 
 export default router;

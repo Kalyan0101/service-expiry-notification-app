@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- <title>Register</title> -->
+</head>
+
+<body>
+    <form id="my_form" method="POST" class="bg-gray-200 flex justify-center items-center h-full w-full">
+        <div class="bg-white flex flex-col justify-center items-center gap-10 py-4 px-5 rounded-lg">
+            <h1 class="font-bold text-xl">Order Creation Form</h1>
+            <!-- error -->
+            <p id="error_msg" class="text-lg text-red-500 font-semibold"></p>
+            <!-- customer -->
+            <div class="w-full flex justify-between items-center gap-3">
+                <div class="flex justify-between items-center w-full">
+                    <i class="fa-solid fa-user text-gray-400 px-1"></i>
+                    <label for="customer">Customer:</label>
+                    <select name="customer" id="customer" class="w-full px-2 py-2 rounded-lg outline-none ml-5 font-semibold cursor-pointer border">
+                        <option value="">Select Customer</option>
+                    </select>
+                </div>
+                <div class="flex items-center justify-between w-full">
+                    <i class="fa-solid fa-envelope text-gray-400 px-1"></i>
+                    <label for="name">Email:</label>
+                    <input type="text" placeholder="user email" id="email" class="w-full ml-5 px-5 py-2 font-semibold"
+                        disabled>
+                </div>
+            </div>
+
+            <!-- service -->
+            <div id="service-template" class="hidden">
+                <div id="service-row" class="w-full flex justify-between items-start gap-5 my-5">
+                    <div class="w-full flex justify-between items-center">
+                        <i class="fa-solid fa-layer-group text-gray-400 px-1"></i>
+                        <label for="service">Service:</label>
+                        <select class="w-full px-2 py-2 rounded-lg outline-slate-400 border ml-5 font-semibold cursor-pointer service">
+                            <option value="">Select Service</option>
+                        </select>
+                    </div>
+                    <div class="w-full flex justify-between items-center">
+                        <i class="fa-solid fa-calendar-days text-gray-400 px-1"></i>
+                        <label>Validity:</label>
+                        <input type="text" class="w-full ml-5 px-5 py-2 font-semibold rounded-lg validity" disabled>
+                    </div>
+                    <div class="w-full flex justify-between items-center">
+                        <i class="fa-solid fa-indian-rupee-sign text-gray-400 px-1"></i>
+                        <label>Price:</label>
+                        <input type="text" class="w-full ml-5 px-5 py-2 font-semibold rounded-lg price" disabled>
+                    </div>
+                </div>
+            </div>
+
+            <div id="service-container" class=""></div>
+
+            <button type="button" id="add-service-btn" class="rounded bg-green-500 text-white py-1 px-5 hover:bg-green-600 inline-block">+Add Service</button>
+            <button type="submit" class="self-end bg-blue-500 text-white rounded py-1 px-5 hover:bg-blue-600 inline-block">Create</button>
+        </div>
+    </form>
+</body>
+
+<script type="module" src="/static/js/create_order.js"></script>
+
+</html>

@@ -1,4 +1,4 @@
-const success_alert = (message = "Login Successfull.") => {
+const success_alert = (message = "Login Successfull.", icon = "success") => {
   const Toast = Swal.mixin({
     toast: true,
     position: "top-end",
@@ -11,7 +11,7 @@ const success_alert = (message = "Login Successfull.") => {
     },
   });
   Toast.fire({
-    icon: "success",
+    icon,
     title: message,
   });
 };

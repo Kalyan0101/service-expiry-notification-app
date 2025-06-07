@@ -9,6 +9,7 @@ export const createService = async (req, res) => {
   }
 
   try {
+    console.log("creating service");
     const createdServices = await Service.create({
       name,
       description,
@@ -19,6 +20,7 @@ export const createService = async (req, res) => {
     if (!createdServices) {
       res.status(400).json({ message: "service not created" });
     }
+    console.log("service created");
     console.log(createdServices);
     res.status(200).json({ message: "service created successfully" });
   } catch (error) {
@@ -31,11 +33,11 @@ export const getAllServices = async (req, res) => {
   try {
     const allServices = await Service.findAll();
 
-    if (!allServices) {
-      res.status(400).json({ message: "could not found the services" });
+    if(allServices.length == 0) {
+      return res.status(400).json({ success: 400, message: "could not found any services" });
     }
 
-    res.status(200).json({ allServices });
+    res.status(200).json(allServices);
   } catch (error) {
     res.status(500).send(error);
   }
