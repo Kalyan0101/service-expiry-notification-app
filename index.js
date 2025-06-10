@@ -36,6 +36,7 @@ app.use(
 
 import auth_router from './src/routes/auth.route.js';
 import user_router from './src/routes/user.route.js';
+import dashboard_router from './src/routes/dashboard.route.js';
 import country_router from "./src/routes/country.route.js";
 import state_router from "./src/routes/states.route.js";
 import city_route from "./src/routes/city.route.js";
@@ -47,7 +48,8 @@ import order_route from "./src/routes/order.route.js";
 app.use('/auth', auth_router);
 
 // secure route
-app.use('/', user_router);
+app.use("/", dashboard_router);
+app.use('/user', user_router);
 app.use("/service", service_route);
 app.use("/order", order_route);
 app.use("/customer", customer_route);

@@ -1,10 +1,20 @@
 import User from "../models/user.model.js";
 import { async_handler } from "../utils/async_handler.js";
-import bcrypt from "bcrypt"
+import bcrypt, { hash } from "bcrypt"
+import { sendOtpEmail } from "../utils/send_mail.js";
 
 const generate_OTP = () => {
-	return Math.ceil(Math.random() * 6);
-}
+
+	const str = "0123456789";
+	let otp = "";
+
+	for(let i = 0; i < 6; i++){
+		otp += str.charAt(Math.floor(Math.random() * str.length ))
+	}
+
+	return otp;
+};
+
 
 const register = async_handler(async (req, res) => {
 	try {
@@ -120,21 +130,71 @@ const login = async_handler(async (req, res) => {
 	}
 });
 
-const forgot_password = async_handler(async (req, res) => {
+const verified_otp = async_handler(async (req, res) => {
 	try {
-
 		console.log(req.body);
 
+		if (req.body && req.body.email && !req.body.otp) {
 
-		const { email } = req.body;
+			const { email } = req.body;
 
-		const user = await User.findOne({ where: { email: email } });
-		if (!user) return res.status(400).json({ status: 400, message: "Email not found!" });
+			const user = await User.findOne({ where: { email: email } });
+			if (!user) return res.status(400).json({ status: 400, message: "Email not found!" });
 
-		return res.status(200).json({ status: 200, message: "password reset" });
+			const otp = generate_OTP();
+			req.session.otp = { otp: otp, email: email };
+			req.session.save(async (err) => {
+				if (err) {
+					return res.status(500).json({ success: 500, message: err })
+				}
+				const mail = await sendOtpEmail(email, otp);
+
+				return res.json({ success: 200, message: "otp send successfully." });
+			})
+		}
+		if (req.body && req.body.otp) {
+
+			console.log(req.session.otp);
+
+			const user_otp = req.body.otp;
+			const user_email = req.body.email;
+
+			const saved_otp = req.session.otp.otp;
+			const saved_email = req.session.otp.email;
+
+			if(saved_otp !== user_otp && user_email !== saved_email){
+				return res.json({ status: 400, message: "otp not matching!" });
+			}
+
+			return res.json({ success: 200, message: "otp verified" });
+		}
 
 	} catch (error) {
+		console.log(error);		
 		return res.status(400).json({ status: 400, message: error.message })
+	}
+});
+
+const reset_password = async_handler(async (req, res) => {
+	try {
+		const { email } = req.session.otp;
+		const { password } = req.body;
+
+		if(!password) return res.json({ message: "password must required!" });
+
+		const user = await User.findOne({ where: { email: email } })
+		if(!user) return res.json({ success: 500, message: "email not found" })
+
+		const hash_password = await bcrypt.hash(password, 10);
+
+		user.password = hash_password;
+		user.save();
+
+		return res.json({ success: 200, message: "Password reset Successfully." })
+
+	} catch (error) {
+		console.log(error);
+		return res.json({ status: 400, message: error.message })
 	}
 });
 
@@ -148,4 +208,4 @@ const logout = async_handler(async (req, res) => {
 
 
 
-export { register, login, forgot_password, logout };
+export { register, login, verified_otp, reset_password, logout };

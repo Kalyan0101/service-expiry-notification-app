@@ -26,7 +26,7 @@ window.delete_user = (user_id) => {
     .then(res => {
         if (res) {
             console.log(user_id);
-            fetch(`delete_user?user_id=${user_id}`)
+            fetch(`/user/delete_user?user_id=${user_id}`)
             .then(res => res.json())
             .then(data => {
 
@@ -45,21 +45,20 @@ window.delete_user = (user_id) => {
 }
 
 window.update_user = (user_id) => {
-    window.location.href = `/update_user?user_id=${user_id}`
+    window.location.href = `/user/update_user?user_id=${user_id}`
 }
 
 const all_user = async (user_email = "") => {
-    fetch(`/all_user${user_email ? `?user_email=${user_email}` : ""}`)
+    fetch(`/user/all_user${user_email ? `?user_email=${user_email}` : ""}`)
         .then(res => res.json())
-        .then(data => {
-            data.users?.map((user, i) => {
+        .then(users => {
+            users?.map((user, i) => {
                 const tr = document.createElement('tr');
 
                 tr.innerHTML = `
                 <td class="p-2">${i + 1}</td>
                 <td>${user.name}</td>
                 <td>${user.email}</td>
-                <td>Admin</td>
                 <td>
                     <i class="fa-solid fa-pen-to-square text-blue-500 cursor-pointer hover:scale-125 mr-2" onclick="update_user('${user.id}')"></i>
                     ${window.user_id != user.id ? `
@@ -71,4 +70,4 @@ const all_user = async (user_email = "") => {
             })
         })
 }
-all_user()
+all_user();

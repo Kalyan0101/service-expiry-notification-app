@@ -76,4 +76,31 @@ const dashboard_stats = async_handler(async (req, res) => {
     return res.json(result)
 });
 
-export { getDayfromExpirydata, dashboard_stats}
+const recentctivity=async_handler(async(req,res)=>{
+    try {
+        const recentuser=await User.findOne({
+            order:[
+                ['createdAt','DESC']
+            ],
+        })
+        if(!recentuser){
+            res.json("no user found");
+            return;
+        }
+        const recentOrder=await Order.findOne({
+            order:[
+                ['createdAt','DESC']
+            ]
+        })
+        if(!recentOrder){
+            res.json("no order found");
+        }
+        res.json({recentOrder,recentuser});
+    } catch (error) {
+        
+    }
+
+
+})
+
+export { getDayfromExpirydata, dashboard_stats,recentctivity}

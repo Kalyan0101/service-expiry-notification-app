@@ -242,7 +242,7 @@ document.getElementById("prevPage30").addEventListener("click", function () {
 document.addEventListener("DOMContentLoaded", loadExpiringServices30);
 
 ;(() => {
-  fetch(`/customer/dashboard_stats`)
+  fetch(`/dashboard_stats`)
   .then(res => res.json())
   .then(data => {
     total_customers.innerText = data.customer;
@@ -251,3 +251,56 @@ document.addEventListener("DOMContentLoaded", loadExpiringServices30);
     total_user.innerText = data.user;
   })
 })();
+
+function formatTimeAgo(dateString) {
+  const pastDate = new Date(dateString);
+  const now = new Date();
+  const diff = now.getTime() - pastDate.getTime(); // difference in milliseconds
+
+  const seconds = Math.floor(diff / 1000);
+  const minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+  const months = Math.floor(days / 30.44); // Average days in a month
+  const years = Math.floor(days / 365.25); // Average days in a year
+
+  if (years > 0) {
+      return `${years} year${years > 1 ? 's' : ''} ago`;
+  } else if (months > 0) {
+      return `${months} month${months > 1 ? 's' : ''} ago`;
+  } else if (days > 0) {
+      return `${days} day${days > 1 ? 's' : ''} ago`;
+  } else if (hours > 0) {
+      return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+  } else if (minutes > 0) {
+      return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+  } else if (seconds > 0) {
+      return `${seconds} second${seconds > 1 ? 's' : ''} ago`;
+  } else {
+      return "just now";
+  }
+}
+
+const recentActivity=async()=>{
+  try {
+    await fetch(`/recent_activity`)
+    .then(res => res.json())
+    .then((res)=>{
+      document.getElementById("newUser").innerHTML=res.recentuser.name
+      document.getElementById("recentOrder").innerHTML=res.recentOrder.id
+      const orderPurchaseDateFormatted = formatTimeAgo(res.recentOrder.purchase_date);
+      const userCreatedAtFormatted = formatTimeAgo(res.recentuser.createdAt);
+      document.getElementById("recentuserId").innerHTML=userCreatedAtFormatted
+      document.getElementById("orderDateId").innerHTML=orderPurchaseDateFormatted
+    })
+    
+
+  } catch (error) {
+    console.log(error);
+    
+    document.getElementById("newUser").innerHTML="NA"
+      document.getElementById("recentOrder").innerHTML="NA"
+    
+  }
+}
+recentActivity();

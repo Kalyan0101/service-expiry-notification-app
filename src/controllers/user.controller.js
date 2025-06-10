@@ -19,7 +19,8 @@ const all_user = async_handler(async (req, res) => {
 
         const users = await User.findAll(search);
 
-        return res.status(200).json({ users })
+        // return users;
+        return res.status(200).json(users)
 
     } catch (error) {
         return res.status(500).json(error)
@@ -78,23 +79,4 @@ const update_user = async_handler(async (req, res) => {
     }
 });
 
-const dashboard_data = async_handler(async (req, res) => {
-    try {
-        const dashboard_data = {};
-        
-        const user = await User.findAndCountAll();
-        const coustomer = await Customer.findAndCountAll();
-        const service = await Service.findAndCountAll();
-        const order = await Order.findAndCountAll();
-
-
-    } catch (error) {
-        console.error(error);
-        return res.status(500).json({success: 500, message: error.message});
-    }
-})
-
-
-
-
-export { delete_user, all_user, update_user, dashboard_data }
+export { delete_user, all_user, update_user }

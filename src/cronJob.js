@@ -3,10 +3,11 @@ import Order from "./models/order.model.js";
 import Service from "./models/service.model.js";
 import Customer from "./models/customer.model.js";
 
-import sendMAil from "./utils/send_mail.js";
+import { sendRenewEmail } from "./utils/send_mail.js";
 
-cron.schedule("0 12 * * *", async () => {
+cron.schedule("0 36 14 * * *", async () => {
   try {
+    console.log("cron run");
     const today = new Date();
     const orders = await Order.findAll({
       include: [
@@ -29,7 +30,7 @@ cron.schedule("0 12 * * *", async () => {
         );
 
         if ([3, 2, 1].includes(daysLeft)) {
-          await sendMAil(
+          await sendRenewEmail(
             order.Customer.email,
             service.name,
             expiryDate.toISOString().slice(0, 10),

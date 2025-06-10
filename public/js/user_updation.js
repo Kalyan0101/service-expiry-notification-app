@@ -12,7 +12,7 @@ c_password.addEventListener("keyup", () => {
         error_msg.innerHTML = "*** confirm password is not matching";
         return;
     }
-    error_msg.innerHTML = "";    
+    error_msg.innerHTML = "";
 })
 
 // update user details
