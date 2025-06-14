@@ -21,10 +21,9 @@ form.addEventListener("submit", (e) => {
     
     const form_data = new FormData(form);
 
-    fetch(`/update_user`, {
+    fetch(`/user/update_user`, {
         method: "POST",
-        body: form_data,
-        
+        body: form_data,        
     })
     .then(res => res.json())
     .then(data => {       

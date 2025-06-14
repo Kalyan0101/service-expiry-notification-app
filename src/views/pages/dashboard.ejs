@@ -20,6 +20,10 @@
       <h3 class="text-purple-600"><span id="total_customers"></span></h3>
     </div>
   </section>
+  <section class="w-full bg-white p-3 rounded">
+    <h2 class="font-bold mb-2">Service Distribution</h2>
+    <div id="donutchart" style="width: 100%; height: 400px"></div>
+  </section>
 
   <!-- second row -->
   <section class="w-full bg-white p-3 rounded flex flex-col gap-2">
@@ -141,4 +145,6 @@
   <% if (data) { %> <%= data.email %> <% } %>
   <!-- <script type="module" src="/static/js/sidebar.js"></script> -->
 </main>
+<script src="https://www.gstatic.com/charts/loader.js"></script>
+
 <script type="module" src="/static/js/dashboard.js"></script>

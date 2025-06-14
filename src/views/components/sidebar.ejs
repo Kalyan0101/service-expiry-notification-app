@@ -15,22 +15,53 @@
   <aside class="h-screen w-[12rem] bg-gray-900 text-white px-3 py-2">
     <h1 class="pb-5 font-bold text-xl">Admin Panel</h1>
     <div class="flex flex-col gap-3">
-      <a href="/dashboard" class="hover:bg-gray-500 px-2 py-1">
+      <a 
+        href="/dashboard" 
+        class="
+          px-2 py-1
+          <%= title === "Dashboard" ? "bg-gray-500" : "hover:bg-gray-500" %>
+        "
+      >
         <i class="fa-solid fa-house"></i> Dashboard
       </a>
 
-      <a href="/user" class="hover:bg-gray-500 px-2 py-1">
+      <a 
+        href="/user" 
+        class="
+          px-2 py-1
+          <%= title === "User" || title === "User > Update User" ? "bg-gray-500" : "hover:bg-gray-500" %>
+        "
+      >
         <i class="fa-solid fa-users"></i> Users
       </a>
-      <a href="/service" class="hover:bg-gray-500 px-2 py-1">
+
+      <a 
+        href="/service" 
+        class="
+          px-2 py-1
+          <%= title === "Service" || title === "Add Service" ? "bg-gray-500" : "hover:bg-gray-500" %>
+        "
+      >
         <i class="fa-solid fa-layer-group"></i> Services
       </a>
 
-      <a href="/order" class="hover:bg-gray-500 px-2 py-1">
+      <a 
+        href="/order" 
+        class="
+          px-2 py-1
+          <%= title === "Order" || title === "Order > Create Order" ? "bg-gray-500" : "hover:bg-gray-500" %>
+          "
+      >
         <i class="fa-solid fa-cart-shopping"></i> Orders
       </a>
 
-      <a href="/customer" class="hover:bg-gray-500 px-2 py-1">
+      <a 
+        href="/customer" 
+        class="
+         px-2 py-1
+          <%= title === "Customer" || title === "Add Customer" ? "bg-gray-500" : "hover:bg-gray-500" %>
+        "
+      >
         <i class="fa-solid fa-user-tie"></i> Customers
       </a>
 

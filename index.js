@@ -21,13 +21,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(
     session({
-        secret: "jkewrtg87tygdvoq734hgqero87",
+        secret: process.env.SESSION_SECRET_KEY,
         store: session_store,
         resave: false,
         saveUninitialized: false,
         cookie: {
             // secure: true
-            // maxAge: 1000 * 60 * 60 // 1 hour
+            maxAge: 60 * 60 * 1000, // 1 hour
             httpOnly: true,
         },
     })
@@ -61,10 +61,10 @@ app.use("/api", city_route);
 // default route / 4O4 route
 app.use((req, res) => {
 
-    if(req.session.user) return res.redirect("/dashboard");
-    
+    if (req.session.user) return res.redirect("/dashboard");
+
     return res.redirect("/auth/login");
-})
+});
 
 const port = process.env.PORT || 3030
 db_connect()

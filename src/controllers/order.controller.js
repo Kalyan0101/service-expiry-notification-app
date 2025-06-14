@@ -53,6 +53,7 @@ const all_order = async_handler(async (req, res) => {
 });
 
 const create_order = async_handler(async (req, res) => {
+    console.log(req.body)
     try {
         const { customer } = req.body;
         const { id } = req.session.user;
@@ -69,7 +70,7 @@ const create_order = async_handler(async (req, res) => {
             user_id: id,
             purchase_date: new Date()
         })
-        await order.addServices(serviceIds);
+        await order.addServices(serviceIds, { ignoreDuplicates: true });
 
         console.log(order); // FLAG:
 

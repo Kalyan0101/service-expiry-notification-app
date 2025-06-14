@@ -15,7 +15,6 @@ const generate_OTP = () => {
 	return otp;
 };
 
-
 const register = async_handler(async (req, res) => {
 	try {
 		const { name = "", email = "", password = "", c_passsword = "" } = req.body;
@@ -202,7 +201,13 @@ const logout = async_handler(async (req, res) => {
 
 	req.session.destroy((err) => {
 		console.log(err);
-		return res.json(true)
+		if(err) return res.json({success: 500, message: "Error loging out!"});
+
+		res.clearCookie("connect.sid", {
+			path: "/",
+			httpOnly: true
+		});
+		return res.json({success: 200, message: "logout seccessfully."})
 	})
 });
 

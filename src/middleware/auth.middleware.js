@@ -3,7 +3,7 @@ const auth_session = (req, res, next) => {
   // console.log(req.session.user); // FLAG:
 
   try {
-    const user = req?.session?.user || "";
+    const user = req?.session?.user;
 
     if (!user) return res.redirect("/auth/login");
 

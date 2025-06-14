@@ -14,10 +14,14 @@
         <!-- head -->
         <div class="flex justify-between items-center mb-5">
             <!-- search box -->
-            <div class="border pl-3 rounded-lg bg-white">
-                <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
-                <input type="text" name="search" id="search" placeholder="Search by order Id or number..."
-                    class="w-[18rem] px-2 py-1 outline-none rounded-lg">
+            <div class="flex justify-center items-center gap-1">
+                <div class="border pl-3 rounded-lg bg-white">
+                    <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
+                    <input type="text" name="search" id="search" placeholder="Search by order Id or number..."
+                        class="w-[18rem] px-2 py-1 outline-none rounded-lg"
+                        title="# prefix required to search via order id">
+                </div>
+                <p id="searchBy" class="text-gray-500"></p>
             </div>
             <a href="/order/create_order"
                 class="bg-blue-500 text-white font-semibold py-1 px-3 rounded hover:bg-blue-600">

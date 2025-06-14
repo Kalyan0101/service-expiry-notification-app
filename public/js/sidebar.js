@@ -6,11 +6,8 @@ logout_btn.addEventListener("click", async () => {
 
     confirmation()
     .then((res) => {
-        
         if(res){
-            fetch("/auth/logout",{
-                credentials: "include"
-            })
+            fetch("/auth/logout")
             .then(data => data.json())
             .then(() => {
                 window.location.href = "/auth/login"

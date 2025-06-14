@@ -3,6 +3,8 @@ import Order from "../models/order.model.js";
 import Service from "../models/service.model.js";
 import User from "../models/user.model.js";
 import { async_handler } from "../utils/async_handler.js";
+import OrderHasService from "../models/order_has_service.model.js";
+import { Sequelize } from "sequelize";
 
 const getDayfromExpirydata = async_handler(async (req, res) => {
     const DAY = parseInt(req.params.day);
@@ -76,31 +78,60 @@ const dashboard_stats = async_handler(async (req, res) => {
     return res.json(result)
 });
 
-const recentctivity=async_handler(async(req,res)=>{
-    try {
-        const recentuser=await User.findOne({
-            order:[
-                ['createdAt','DESC']
-            ],
-        })
-        if(!recentuser){
-            res.json("no user found");
-            return;
-        }
-        const recentOrder=await Order.findOne({
-            order:[
-                ['createdAt','DESC']
-            ]
-        })
-        if(!recentOrder){
-            res.json("no order found");
-        }
-        res.json({recentOrder,recentuser});
-    } catch (error) {
-        
+const recentctivity = async_handler(async (req, res) => {
+  try {
+    const recentuser = await User.findOne({
+      order: [["createdAt", "DESC"]],
+    });
+    if (!recentuser) {
+      res.json("no user found");
+      return;
     }
+    const recentOrder = await Order.findOne({
+      order: [["createdAt", "DESC"]],
+    });
+    if (!recentOrder) {
+      res.json("no order found");
+    }
+    res.json({ recentOrder, recentuser });
+  } catch (error) {}
+});
 
+const getServiceByCount = async_handler(async (req, res) => {
+  try {
+    console.log("getting");
+    const serviceFrequency = await OrderHasService.findAll({
+      attributes: [
+        "service_id",
+        [
+          Sequelize.fn("COUNT", Sequelize.col("OrderHasService.service_id")),
+          "count",
+        ],
+      ],
+      include: [
+        {
+          model: Service,
+          attributes: ["name"],
+        },
+      ],
+      group: ["OrderHasService.service_id", "Service.id"],
+      raw: true,
+    });
 
-})
+    if (!serviceFrequency) {
+      res.status(404).json("not found");
+    }
+    res.status(200).json(serviceFrequency);
+  } catch (error) {
+    console.log(error);
+    
+    res.status(500).json(error);
+  }
+});
 
-export { getDayfromExpirydata, dashboard_stats,recentctivity}
+export {
+  getDayfromExpirydata,
+  dashboard_stats,
+  recentctivity,
+  getServiceByCount
+};

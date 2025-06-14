@@ -78,8 +78,9 @@ function renderPagination15(search = "") {
   const pagination = document.getElementById("pagination15");
   pagination.innerHTML = "";
   for (let i = 1; i <= totalPages; i++) {
-    pagination.innerHTML += `<button class="py-1 px-2 rounded ${i === currentPage15 ? "bg-blue-500 text-white" : "bg-gray-200"
-      }" onclick="changePage15(${i})">${i}</button>`;
+    pagination.innerHTML += `<button class="py-1 px-2 rounded ${
+      i === currentPage15 ? "bg-blue-500 text-white" : "bg-gray-200"
+    }" onclick="changePage15(${i})">${i}</button>`;
   }
 }
 
@@ -198,8 +199,9 @@ function renderPagination30(search = "") {
   const pagination = document.getElementById("pagination30");
   pagination.innerHTML = "";
   for (let i = 1; i <= totalPages; i++) {
-    pagination.innerHTML += `<button class="py-1 px-2 rounded ${i === currentPage30 ? "bg-blue-500 text-white" : "bg-gray-200"
-      }" onclick="changePage30(${i})">${i}</button>`;
+    pagination.innerHTML += `<button class="py-1 px-2 rounded ${
+      i === currentPage30 ? "bg-blue-500 text-white" : "bg-gray-200"
+    }" onclick="changePage30(${i})">${i}</button>`;
   }
 }
 window.changePage30 = function (page) {
@@ -241,15 +243,15 @@ document.getElementById("prevPage30").addEventListener("click", function () {
 
 document.addEventListener("DOMContentLoaded", loadExpiringServices30);
 
-;(() => {
+(() => {
   fetch(`/dashboard_stats`)
-  .then(res => res.json())
-  .then(data => {
-    total_customers.innerText = data.customer;
-    total_orders.innerText = data.order;
-    total_services.innerText = data.service;
-    total_user.innerText = data.user;
-  })
+    .then((res) => res.json())
+    .then((data) => {
+      total_customers.innerText = data.customer;
+      total_orders.innerText = data.order;
+      total_services.innerText = data.service;
+      total_user.innerText = data.user;
+    });
 })();
 
 function formatTimeAgo(dateString) {
@@ -265,42 +267,74 @@ function formatTimeAgo(dateString) {
   const years = Math.floor(days / 365.25); // Average days in a year
 
   if (years > 0) {
-      return `${years} year${years > 1 ? 's' : ''} ago`;
+    return `${years} year${years > 1 ? "s" : ""} ago`;
   } else if (months > 0) {
-      return `${months} month${months > 1 ? 's' : ''} ago`;
+    return `${months} month${months > 1 ? "s" : ""} ago`;
   } else if (days > 0) {
-      return `${days} day${days > 1 ? 's' : ''} ago`;
+    return `${days} day${days > 1 ? "s" : ""} ago`;
   } else if (hours > 0) {
-      return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+    return `${hours} hour${hours > 1 ? "s" : ""} ago`;
   } else if (minutes > 0) {
-      return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+    return `${minutes} minute${minutes > 1 ? "s" : ""} ago`;
   } else if (seconds > 0) {
-      return `${seconds} second${seconds > 1 ? 's' : ''} ago`;
+    return `${seconds} second${seconds > 1 ? "s" : ""} ago`;
   } else {
-      return "just now";
+    return "just now";
   }
 }
 
-const recentActivity=async()=>{
+const recentActivity = async () => {
   try {
     await fetch(`/recent_activity`)
-    .then(res => res.json())
-    .then((res)=>{
-      document.getElementById("newUser").innerHTML=res.recentuser.name
-      document.getElementById("recentOrder").innerHTML=res.recentOrder.id
-      const orderPurchaseDateFormatted = formatTimeAgo(res.recentOrder.purchase_date);
-      const userCreatedAtFormatted = formatTimeAgo(res.recentuser.createdAt);
-      document.getElementById("recentuserId").innerHTML=userCreatedAtFormatted
-      document.getElementById("orderDateId").innerHTML=orderPurchaseDateFormatted
-    })
-    
-
+      .then((res) => res.json())
+      .then((res) => {
+        document.getElementById("newUser").innerHTML = res.recentuser.name;
+        document.getElementById("recentOrder").innerHTML = res.recentOrder.id;
+        const orderPurchaseDateFormatted = formatTimeAgo(
+          res.recentOrder.purchase_date
+        );
+        const userCreatedAtFormatted = formatTimeAgo(res.recentuser.createdAt);
+        document.getElementById("recentuserId").innerHTML =
+          userCreatedAtFormatted;
+        document.getElementById("orderDateId").innerHTML =
+          orderPurchaseDateFormatted;
+      });
   } catch (error) {
     console.log(error);
-    
-    document.getElementById("newUser").innerHTML="NA"
-      document.getElementById("recentOrder").innerHTML="NA"
-    
+
+    document.getElementById("newUser").innerHTML = "NA";
+    document.getElementById("recentOrder").innerHTML = "NA";
   }
-}
+};
 recentActivity();
+// google chart
+google.charts.load("current", { packages: ["corechart"] });
+google.charts.load("current", { packages: ["corechart"] });
+
+const drawChart = async () => {
+  try {
+    const response = await fetch(`/service_frequency`);
+    const res = await response.json();
+
+    const chartData = [["Service", "Count"]];
+    res.forEach((item) => {
+      const name = item["Service.name"] || `Service ${item.service_id}`;
+      chartData.push([name, item.count]);
+    });
+
+    const visual = google.visualization.arrayToDataTable(chartData);
+
+    const options = {
+      pieHole: 0.4,
+    };
+
+    const chart = new google.visualization.PieChart(
+      document.getElementById("donutchart")
+    );
+    chart.draw(visual, options);
+  } catch (error) {
+    console.log("fail to draw the chart:", error);
+  }
+};
+
+google.charts.setOnLoadCallback(drawChart);

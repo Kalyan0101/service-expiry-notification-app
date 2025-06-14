@@ -16,7 +16,7 @@ router.get("/", auth_session, async (req, res) => {
   const user = await req.session.user;
   const content = await render_page("manage_service", user);
   res.render("../views/layout", {
-    title: "Manage Service",
+    title: "Service",
     body: content,
     user
   });

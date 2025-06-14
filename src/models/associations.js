@@ -46,3 +46,9 @@ Service.belongsToMany(Order, {
     foreignKey: "service_id",
     onDelete: 'CASCADE'
 });
+
+OrderHasService.belongsTo(Service, { foreignKey: 'service_id' });
+OrderHasService.belongsTo(Order, { foreignKey: 'order_id' });
+
+Service.hasMany(OrderHasService, { foreignKey: 'service_id' });
+Order.hasMany(OrderHasService, { foreignKey: 'order_id' });

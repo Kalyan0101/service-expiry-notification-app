@@ -14,6 +14,10 @@ const User = db_object.define("User", {
     password: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    is_admin: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
     }
 }, {
     timestamps: true,

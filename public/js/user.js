@@ -21,7 +21,6 @@ search.addEventListener("keyup", async (e) => {
 })
 
 window.delete_user = (user_id) => {
-
     confirmation("Delete")
     .then(res => {
         if (res) {
@@ -59,9 +58,10 @@ const all_user = async (user_email = "") => {
                 <td class="p-2">${i + 1}</td>
                 <td>${user.name}</td>
                 <td>${user.email}</td>
+                <td>${user.is_admin ? "Yes" : "No"}</td>
                 <td>
                     <i class="fa-solid fa-pen-to-square text-blue-500 cursor-pointer hover:scale-125 mr-2" onclick="update_user('${user.id}')"></i>
-                    ${window.user_id != user.id ? `
+                    ${window.user_id != user.id && user.is_admin ? `
                         <i class="fa-solid fa-trash text-red-500 cursor-pointer hover:scale-125" onclick="delete_user(${user.id})"></i>
                     ` : ""}
                 </td>

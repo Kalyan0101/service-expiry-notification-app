@@ -7,7 +7,14 @@ const all_Services = () => {
   fetch(`/service/getall`)
     .then((res) => res.json())
     .then((data) => {
+
+      if(data.success / 100 >= 3){
+        serviceTableBody.innerHTML = "No Service Registered Yet.";
+        return;
+      }
+
       serviceTableBody.innerHTML = ""; // Clear previous rows
+      
       data?.map((service, i) => {
         const tr = document.createElement("tr");
         tr.innerHTML = `

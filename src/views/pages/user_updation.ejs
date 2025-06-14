@@ -46,6 +46,25 @@
                     >
                 </div>
             </div>
+
+            <% if (data.is_admin) { %>
+                <div class="self-start w-full">
+                    <label for="name">Admin:</label>
+                    <div class="flex flex-row items-center border rounded">
+                        <i class="fa-solid fa-user-gear text-gray-400 px-1"></i>
+                        <select name="admin" id="admin" class="w-full px-2 py-1 outline-none">
+                            <% if (data.is_admin == 0) { %>
+                                <option value="0" selected>No</option>
+                                <option value="1">Yes</option>
+                            <% } else { %>
+                                <option value="0">No</option>
+                                <option value="1" selected>Yes</option>
+                            <% } %>                             
+                        </select>
+                    </div>
+                </div>
+            <% } %>
+
             <div class="self-start w-full">
                 <label for="password">Password:</label>
                 <div class="flex flex-row items-center border rounded">

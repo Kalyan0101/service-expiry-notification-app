@@ -49,26 +49,26 @@ add_service_btn.addEventListener("click", () => {
     select.setAttribute("name", `service_${serviceRowCounter}`);
 
     fetch(`/service/getall`)
-        .then(res => res.json())
-        .then(data => {
+    .then(res => res.json())
+    .then(data => {
 
-            if (data.success / 100 >= 3) {
-                success_alert("No service registered yet.\nRedirect to service page.", "error");
-                setTimeout(() => {
-                    window.location.href = "/service";
-                }, 2000)
-            }
+        if (data.success / 100 >= 3) {
+            success_alert("No service registered yet.\nRedirect to service page.", "error");
+            setTimeout(() => {
+                window.location.href = "/service";
+            }, 2000)
+        }
 
-            data.map(item => {
-                const option = document.createElement("option");
-                option.setAttribute("value", item.id);
-                option.setAttribute("data-price", item.price);
-                option.setAttribute("data-validity", item.validity);
-                option.innerText = item.name;
+        data.map(item => {
+            const option = document.createElement("option");
+            option.setAttribute("value", item.id);
+            option.setAttribute("data-price", item.price);
+            option.setAttribute("data-validity", item.validity);
+            option.innerText = item.name;
 
-                select.appendChild(option);
-            });
+            select.appendChild(option);
         });
+    });
 
     select.addEventListener("change", function () {
 
@@ -89,6 +89,27 @@ my_form.addEventListener("submit", function (e) {
     e.preventDefault();
 
     const formData = new FormData(my_form);
+
+
+    let values = [];
+    let isDuplicate = false;
+
+    for(const [key, value] of formData){
+
+        if(!key.startsWith("service_")) continue;
+
+        if(values.includes(value)){
+            isDuplicate = true;
+            break;
+        }
+        values.push(value);        
+    }
+
+    if(isDuplicate){
+        error_alert("Can't choose same service multiple times!!!");
+        document.getElementById("service-container").innerHTML = "";
+        return;
+    }
 
     fetch(`/order/create_order`, {
         method: "POST",

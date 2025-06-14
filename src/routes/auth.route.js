@@ -11,8 +11,17 @@ import auth_session from "../middleware/auth.middleware.js";
 
 const router = Router();
 
+const redirect_if_authorised = async (req, res, next) => {
+    if(req.session.user){
+        if(req.path === "/login" || req.path === "/register"){
+            return res.redirect("/dashboard");
+        }
+    }
+    next();
+}
+
 router.route("/register")
-    .get((_, res) => res.render("../views/pages/register", 
+    .get(redirect_if_authorised, (_, res) => res.render("../views/pages/register", 
         {
             message: null,
             form_data: {}
@@ -21,7 +30,7 @@ router.route("/register")
     .post(upload.none(), register);
 
 router.route("/login")
-    .get((_, res) => res.render("../views/pages/login",
+    .get(redirect_if_authorised, (_, res) => res.render("../views/pages/login",
         {
             message: null,
             form_data: {}

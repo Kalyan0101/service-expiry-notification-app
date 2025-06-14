@@ -52,17 +52,20 @@ const delete_user = async_handler(async (req, res) => {
 
 const update_user = async_handler(async (req, res) => {
     try {
-		const { name = "", email = "", password = "", c_password = "" } = req.body; 
+		const { name = "", email = "", password = "", c_password = "", admin = "" } = req.body; 
 
         if(!email) return res.status(400).json({ success: 400, message: "email required!"});
         if(password !== c_password) return res.status(400).json({ success: 400, message: "Confirm password is not matching!"});
 
         let replace_object = {}
         if(name) replace_object.name = name.trim();
+        if(admin) replace_object.is_admin = admin;
         if(password) {
             const hash_password = bcrypt.hash(password, 10);
             replace_object.password = await hash_password;
         }
+
+        console.log(replace_object);        
 
         await User.update(
             replace_object,
@@ -71,7 +74,18 @@ const update_user = async_handler(async (req, res) => {
             }
         );
 
-        return res.status(200).json({ success: 200, message: "Updation successfull."});
+        const user = await User.findOne({ where: {email: email} });
+
+        req.session.user = user.dataValues;
+		req.session.save((err) => {
+			if (err) {
+				console.error("Error saving session:", err);
+				return;
+			} else {
+				console.log("Session saved successfully.");
+			}
+            return res.status(200).json({ success: 200, message: "Updation successfull."});
+		});
 
     } catch (error) {
         console.error(error);

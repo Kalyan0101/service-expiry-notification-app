@@ -93,19 +93,6 @@ export const addCustomer = async_handler(async (req, res) => {
     }
 });
 
-// export const getCustomerById = async (req, res) => {
-//   const customerid = req.params.id;
-//   try {
-//     const customer = await Customer.findAll({ where: { id: customerid } });
-//     if (!customer) {
-//       res.status(400).json("not found");
-//       return;
-//     }
-//     res.status(200).json(customer);
-//   } catch (error) {
-//     res.status(500).send(error);
-//   }
-// };
 export const getCustomerByName = async (req, res) => {
     try {
         const customerName = req.query.name;
@@ -173,7 +160,7 @@ export const getCustomerServices = async_handler(async (req, res) => {
 
         const orderIds = orders.map((order) => order.id);
         if (orderIds.length === 0) {
-            return res.status(400).json("no order ");
+            return res.status(400).json({ success: 400, message:"no order " });
         }
 
         //get all order has service

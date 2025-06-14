@@ -26,36 +26,38 @@ const all_customer = async (customerName = "") => {
   fetch(`/customer/getCustomerByName${customerName ? `?name=${customerName}` : ""}`)
     .then((res) => res.json())
     .then((data) => {
+
+      if(data.success / 100 >= 3){
+        customerTableBody.innerHTML = "No Customer Registered Yet.";
+        return;
+      }
+      
       customerTableBody.innerHTML = "";
 
       const Customerpromise = data.map((customer, i) => {
         return getServices(customer.id).then((serviceData) => {
           const tr = document.createElement("tr");
-          console.log(i);
-
           tr.innerHTML = `
-                  <td class="p-2">${i}</td>
-                  <td>${customer.name}</td>
-                  <td>${customer.email}</td>
-                  <td>${customer.ph_number}</td>
-                  <td>${serviceData}</td>
-                  
-                  
-                  <td>
-                      
-                    <i class="fa-solid fa-eye text-blue-500 cursor-pointer"
-                  onclick='window.show_customer(${JSON.stringify(
-                    customer
-                  ).replace(/'/g, "\\'")})'></i>
-                  <i class="fa-solid fa-pen-to-square text-blue-500 cursor-pointer"
-                  onclick='window.edit_Customer(${JSON.stringify(
-                    customer
-                  )})'></i>
-    
-                      <i class="fa-solid fa-trash text-red-500 cursor-pointer"
-      onclick="window.delete_customer(${customer.id})"></i>
-                  </td>
-              `;
+            <td class="p-2">${i+1}</td>
+            <td>${customer.name}</td>
+            <td>${customer.email}</td>
+            <td>${customer.ph_number}</td>
+            <td>${serviceData}</td>                 
+            <td>
+              <i 
+                class="fa-solid fa-eye text-blue-500 cursor-pointer" 
+                onclick='window.show_customer(${JSON.stringify(customer).replace(/'/g, "\\'")})'>
+              </i>
+              <i 
+                class="fa-solid fa-pen-to-square text-blue-500 cursor-pointer" 
+                onclick='window.edit_Customer(${JSON.stringify(customer)})'>
+              </i>
+              <i 
+                class="fa-solid fa-trash text-red-500 cursor-pointer" 
+                onclick="window.delete_customer(${customer.id})">
+              </i>
+            </td>
+          `;
           return tr;
         });
       });
@@ -133,6 +135,10 @@ const getServices = (customer_id) => {
   return fetch(`/customer/getservices/${customer_id}`)
     .then((res) => res.json())
     .then((data) => {
+      if(data.success / 100 >= 3){
+        return "No service yet.";
+      }
+      
       if (data.length > 0) {
         return data.map((service) => service.name).join(", ");
       } else {
