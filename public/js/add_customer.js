@@ -129,7 +129,7 @@ addCustomerForm.onsubmit = async (e) => {
     if (res.ok) {
       success_alert(data.message);
       //   console.log(data.message);
-      addCustomerForm.reset();
+      window.location.href = "/customer";
     } else if (res.status === 400) {
       error_alert(data.message);
       console.log(data.message);
