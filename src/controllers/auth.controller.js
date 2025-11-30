@@ -59,7 +59,7 @@ const register = async_handler(async (req, res) => {
 
 	} catch (error) {
 
-		console.log(error); // FLAG:		
+		console.log(error); // FLAG:
 
 		return res.render("../views/pages/register.ejs",
 			{
